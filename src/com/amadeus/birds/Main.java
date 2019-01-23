@@ -15,7 +15,5 @@ public class Main {
         shop.buy("Вася", "Ворона", 3);
         shop.buy("Вася", "Сокол", 1);
         shop.buy("Вася", "Утка", 23);
-
-//        shop.printStats();
     }
 }

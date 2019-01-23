@@ -62,27 +62,4 @@ public class Shop {
         this.transactions.add(new Transaction(client, birdName, this.prices.get(birdName), count));
         this.reduceStock(birdName, count);
     }
-
-//    public void printStats() {
-//        HashMap<Pair<String, BirdType>, Integer> stats = new HashMap<>();
-//
-//        for (Transaction transaction: this.transactions) {
-//            Pair<String, BirdType> key = new Pair<>(transaction.getClient(), transaction.getProduct());
-//            int value = transaction.getCount();
-//
-//            if (stats.containsKey(key)) {
-//                value += stats.get(key);
-//            }
-//
-//            stats.put(key, value);
-//        }
-//
-//        for (HashMap.Entry<Pair<String, BirdType>, Integer> item: stats.entrySet()) {
-//            System.out.println(
-//                item.getKey().getKey() + ": "
-//                + item.getValue().toString() + " "
-//                + item.getKey().getValue() + "'s"
-//            );
-//        }
-//    }
 }
