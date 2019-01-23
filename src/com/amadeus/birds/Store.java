@@ -22,7 +22,6 @@ final public class Store {
 
     public int getSizeByType(String type)
     {
-        Iterator<Bird> itr = this.BirdList.iterator();
         int counter = 0;
         for(Bird birdItem:this.BirdList)
         {
@@ -33,4 +32,45 @@ final public class Store {
         return counter;
     }
 
+    public ArrayList<Bird> cropListByType(String type, int quantity)
+    {
+        ArrayList<Bird> TmpBirdList = new ArrayList<Bird>();
+
+        for(int i = 0; i < this.BirdList.size(); i++)
+        {
+            Bird birdItem = this.BirdList.get(i);
+            if (birdItem.getType() == type) {
+                TmpBirdList.add(birdItem);
+                this.BirdList.remove(i);
+            }
+            if (TmpBirdList.size() >= quantity) {
+                break;
+            }
+
+        }
+        return TmpBirdList;
+    }
+
+    public float getTotalPriceByType(String type)
+    {
+        float total = 0;
+        for(Bird birdItem:this.BirdList)
+        {
+            if (birdItem.getType() == type) {
+                total += birdItem.getPrice();
+            }
+        }
+        return total;
+    }
+
+
+    public float getTotalPrice()
+    {
+        float total = 0;
+        for(Bird birdItem:this.BirdList)
+        {
+            total += birdItem.getPrice();
+        }
+        return total;
+    }
 }
