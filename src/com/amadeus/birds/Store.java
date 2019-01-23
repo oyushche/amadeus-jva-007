@@ -1,6 +1,9 @@
 package com.amadeus.birds;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Iterator;
+import java.util.Scanner;
 
 final public class Store {
 
@@ -12,11 +15,22 @@ final public class Store {
         return this.BirdList.size();
     }
 
-
     public void add(Bird bird)
     {
         this.BirdList.add(bird);
     }
 
+    public int getSizeByType(String type)
+    {
+        Iterator<Bird> itr = this.BirdList.iterator();
+        int counter = 0;
+        for(Bird birdItem:this.BirdList)
+        {
+            if (birdItem.getType() == type) {
+                counter++;
+            }
+        }
+        return counter;
+    }
 
 }
