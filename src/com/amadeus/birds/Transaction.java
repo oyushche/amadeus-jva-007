@@ -2,12 +2,14 @@ package com.amadeus.birds;
 
 public class Transaction {
     private String client;
-    private BirdType product;
+    private String birdName;
+    private double price;
     private int count;
 
-    public Transaction(String client, BirdType product, int count) {
+    public Transaction(String client, String birdName, double price, int count) {
         this.client = client;
-        this.product = product;
+        this.birdName = birdName;
+        this.price = price;
         this.count = count;
     }
 
@@ -15,8 +17,12 @@ public class Transaction {
         return this.client;
     }
 
-    public BirdType getProduct() {
-        return this.product;
+    public String getBirdName() {
+        return this.birdName;
+    }
+
+    public double getPrice() {
+        return this.price;
     }
 
     public int getCount() {

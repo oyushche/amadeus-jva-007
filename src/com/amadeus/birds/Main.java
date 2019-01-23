@@ -2,17 +2,20 @@ package com.amadeus.birds;
 
 public class Main {
     public static void main(String[] args) {
-        BirdShop shop = new BirdShop();
+        Shop shop = new Shop();
 
-        shop.setStock(BirdType.DUCK, 2);
-        shop.setStock(BirdType.EAGLE, 10);
+        shop.addBird("Ворона", 1);
+        shop.addBird("Сокол", 5);
+        shop.addBird("Утка", 0.5);
 
-        shop.buy("Vasya", BirdType.EAGLE, 2);
-        shop.buy("Petya", BirdType.DUCK, 1);
-        shop.buy("Vasya", BirdType.DUCK, 1);
-        shop.buy("Petya", BirdType.DUCK, 1);
-        shop.buy("Vasya", BirdType.EAGLE, 5);
+        shop.addStock("Ворона", 20 + 3);
+        shop.addStock("Сокол", 23 + 1);
+        shop.addStock("Утка", 4 + 23);
 
-        shop.printStats();
+        shop.buy("Вася", "Ворона", 3);
+        shop.buy("Вася", "Сокол", 1);
+        shop.buy("Вася", "Утка", 23);
+
+//        shop.printStats();
     }
 }
