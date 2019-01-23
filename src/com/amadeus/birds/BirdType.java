@@ -1,6 +1,3 @@
 package com.amadeus.birds;
 
-public class Bird
-{
-
-}
+enum BirdType {DUCK, EAGLE}
