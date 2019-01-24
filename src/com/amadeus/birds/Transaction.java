@@ -28,4 +28,8 @@ public class Transaction {
     public int getCount() {
         return this.count;
     }
+
+    public double getTotal() {
+        return this.price * this.count;
+    }
 }

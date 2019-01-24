@@ -1,7 +1,5 @@
 package com.amadeus.birds;
 
-import javafx.util.Pair;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -62,4 +60,58 @@ public class Shop {
         this.transactions.add(new Transaction(client, birdName, this.prices.get(birdName), count));
         this.reduceStock(birdName, count);
     }
+
+    public int getSoldBirdsCount(String birdName) {
+        int count = 0;
+
+        for (Transaction transaction: this.transactions) {
+            if (transaction.getBirdName().equals(birdName)) {
+                count += transaction.getCount();
+            }
+        }
+
+        return count;
+    }
+
+    public double getSoldBirdsTotal(String birdName) {
+        double total = 0;
+
+        for (Transaction transaction: this.transactions) {
+            if (transaction.getBirdName().equals(birdName)) {
+                total += transaction.getPrice() * transaction.getCount();
+            }
+        }
+
+        return total;
+    }
+
+    public String[] getBirdsWithStockLessThan(int count) {
+        ArrayList<String> result = new ArrayList<>();
+
+        for (String key: this.stock.keySet()) {
+            if (this.stock.get(key) < count) {
+                result.add(key);
+            }
+        }
+
+        return result.toArray(new String[0]);
+    }
+
+    public double getTransactionsTotal() {
+        double total = 0;
+
+        for (Transaction transaction: this.transactions) {
+            total += transaction.getTotal();
+        }
+
+        return total;
+    }
+
+//    public String[] sortClientsByMoney() {
+//
+//    }
+//
+//    public String[] sortClientsByTransactionsCount() {
+//
+//    }
 }
