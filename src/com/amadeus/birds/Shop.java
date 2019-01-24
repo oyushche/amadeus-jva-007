@@ -2,6 +2,7 @@ package com.amadeus.birds;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeMap;
 
 public class Shop {
     private HashMap<String, Double> prices;
@@ -107,11 +108,29 @@ public class Shop {
         return total;
     }
 
-//    public String[] sortClientsByMoney() {
-//
-//    }
-//
-//    public String[] sortClientsByTransactionsCount() {
-//
-//    }
+    public String[] sortClientsByMoney() {
+        HashMap<String, Double> clientTotals = new HashMap<>();
+
+        for (Transaction transaction: this.transactions) {
+            clientTotals.put(transaction.getClient(), clientTotals.getOrDefault(transaction.getClient(), 0.0) + transaction.getTotal());
+        }
+
+        TreeMap<String, Double> sorted = new TreeMap<>(new ValueComparator<>(clientTotals));
+        sorted.putAll(clientTotals);
+
+        return sorted.keySet().toArray(new String[0]);
+    }
+
+    public String[] sortClientsByTransactionsCount() {
+        HashMap<String, Integer> clientCounts = new HashMap<>();
+
+        for (Transaction transaction: this.transactions) {
+            clientCounts.put(transaction.getClient(), clientCounts.getOrDefault(transaction.getClient(), 0) + 1);
+        }
+
+        TreeMap<String, Integer> sorted = new TreeMap<>(new ValueComparator<>(clientCounts));
+        sorted.putAll(clientCounts);
+
+        return sorted.keySet().toArray(new String[0]);
+    }
 }
