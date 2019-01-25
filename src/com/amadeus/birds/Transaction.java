@@ -11,23 +11,43 @@ public class Transaction {
     private Client client;
     private Integer amount;
     private Double cost;
+    private Double netCost;
 
-    public Transaction(boolean type, Bird bird, Client client, Integer amount, Double cost) {
-        this.type = type;
+    public Double getNetCost() {
+        return netCost;
+    }
+
+    public void setNetCost(Double netCost) {
+        this.netCost = netCost;
+    }
+
+    public Transaction(Bird bird, Client client, Integer amount, Double cost) {
+        this.type = true;
         this.bird = bird;
         this.client = client;
         this.amount = amount;
         this.cost = cost;
+        this.netCost = 0.0;
+    }
+
+    public Transaction(Bird bird, Client client, Integer amount, Double cost, Double netCost ) {
+        this.type = false;
+        this.bird = bird;
+        this.client = client;
+        this.amount = amount;
+        this.cost = cost;
+        this.netCost = netCost;
     }
 
     @Override
     public String toString() {
         return "Transaction{" +
-                "type=" + type +
-                ", bird=" + bird +
-                ", client=" + client +
-                ", amount=" + amount +
-                ", cost=" + cost +
+                "" + type + '\t' +
+                ", " + bird + '\t' +
+                ", " + client + '\t' +
+                ", " + amount + '\t' +
+                ", " + cost + '\t' +
+                ", " + netCost +
                 '}';
     }
 
