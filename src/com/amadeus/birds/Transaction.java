@@ -3,10 +3,9 @@ package com.amadeus.birds;
 import com.amadeus.shared.AbstractProduct;
 
 import java.security.InvalidParameterException;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+
+import static java.lang.System.currentTimeMillis;
 
 public class Transaction {
     private String id;
@@ -14,12 +13,20 @@ public class Transaction {
     private Customer customer;
     private MarketStock stock;
 
+    public Transaction setDate(Date date) {
+        this.date = date;
+        return this;
+    }
+
+    private Date date;
+
     public Transaction(Customer customer, ProductBasket<AbstractProduct> basket, MarketStock stock) {
         this.id = UUID.randomUUID().toString();
         this
             .setCustomer(customer)
             .setBasket(basket)
             .setStock(stock)
+            .setDate(new Date(currentTimeMillis()))
         ;
 
         this.removeProductsFromStock();
