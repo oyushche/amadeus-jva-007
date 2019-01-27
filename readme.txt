@@ -45,5 +45,3 @@ Nokolay said that he keep some notes and showed you the next:
 - Birds sold  (crow - 3, eagle - 1, duck - 23)
 
 + also he wants to know how many birds he should have in the store to maximize profit. He need to know how many birds he sold and how much money he get in last 7 days and also total amounts.
-
-
