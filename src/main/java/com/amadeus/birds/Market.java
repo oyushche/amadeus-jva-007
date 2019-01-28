@@ -1,17 +1,12 @@
-package main.java.com.amadeus.birds;
+package com.amadeus.birds;
 
-import main.java.com.amadeus.shared.AbstractProduct;
-import main.java.com.amadeus.shared.AbstractStorage;
+import com.amadeus.shared.AbstractProduct;
+import com.amadeus.shared.AbstractStorage;
 
-import java.lang.reflect.Array;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Market {
     private MarketStock stock;

@@ -1,4 +1,4 @@
-package main.java.com.amadeus.birds;
+package com.amadeus.birds;
 
 public class Currency {
     private String code;

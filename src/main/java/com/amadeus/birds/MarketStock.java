@@ -1,6 +1,6 @@
-package main.java.com.amadeus.birds;
+package com.amadeus.birds;
 
-import main.java.com.amadeus.shared.AbstractStorage;
+import com.amadeus.shared.AbstractStorage;
 
 public class MarketStock<K> extends AbstractStorage {
 }

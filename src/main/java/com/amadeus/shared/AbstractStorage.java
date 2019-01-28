@@ -1,10 +1,8 @@
-package main.java.com.amadeus.shared;
-
-import main.java.com.amadeus.birds.Transaction;
+package com.amadeus.shared;
 
 import java.security.InvalidParameterException;
-import java.time.LocalDateTime;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 

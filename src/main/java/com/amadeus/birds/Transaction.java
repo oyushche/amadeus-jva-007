@@ -1,15 +1,13 @@
-package main.java.com.amadeus.birds;
+package com.amadeus.birds;
 
-import main.java.com.amadeus.shared.AbstractProduct;
+import com.amadeus.shared.AbstractProduct;
 
 import java.security.InvalidParameterException;
-import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
-
-import static java.lang.System.currentTimeMillis;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 public class Transaction {
     private String id;

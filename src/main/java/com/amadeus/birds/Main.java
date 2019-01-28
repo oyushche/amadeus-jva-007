@@ -1,13 +1,6 @@
-package main.java.com.amadeus.birds;
+package com.amadeus.birds;
 
-import main.java.com.amadeus.birds.*;
-import main.java.com.amadeus.shared.AbstractProduct;
-import main.java.com.amadeus.shared.AbstractStorage;
-
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
+import com.amadeus.shared.AbstractProduct;
 
 public class Main {
     public static void main(String[] args) {
