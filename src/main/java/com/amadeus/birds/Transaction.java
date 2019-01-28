@@ -1,8 +1,12 @@
-package com.amadeus.birds;
+package main.java.com.amadeus.birds;
 
-import com.amadeus.shared.AbstractProduct;
+import main.java.com.amadeus.shared.AbstractProduct;
 
 import java.security.InvalidParameterException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import static java.lang.System.currentTimeMillis;
@@ -12,13 +16,7 @@ public class Transaction {
     private ProductBasket<AbstractProduct> basket;
     private Customer customer;
     private MarketStock stock;
-
-    public Transaction setDate(Date date) {
-        this.date = date;
-        return this;
-    }
-
-    private Date date;
+    private LocalDateTime date;
 
     public Transaction(Customer customer, ProductBasket<AbstractProduct> basket, MarketStock stock) {
         this.id = UUID.randomUUID().toString();
@@ -26,10 +24,19 @@ public class Transaction {
             .setCustomer(customer)
             .setBasket(basket)
             .setStock(stock)
-            .setDate(new Date(currentTimeMillis()))
+            .setDate(LocalDateTime.now())
         ;
 
         this.removeProductsFromStock();
+    }
+
+    public Transaction setDate(LocalDateTime date) {
+        this.date = date;
+        return this;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
     }
 
     public MarketStock getStock() {
@@ -70,7 +77,7 @@ public class Transaction {
 
         while(iter.hasNext()) {
             Map.Entry<AbstractProduct, Integer> entry = (Map.Entry)iter.next();
-            total += entry.getKey().getPrice();
+            total += entry.getKey().getPrice() * entry.getValue();
         }
 
         // TODO WHY ?
@@ -81,8 +88,28 @@ public class Transaction {
         return total;
     }
 
+    public double getTotal(AbstractProduct product) {
+        int total = 0;
+
+        Set entries = basket.getItems().entrySet();
+        Iterator iter = entries.iterator() ;
+
+        while(iter.hasNext()) {
+            Map.Entry<AbstractProduct, Integer> entry = (Map.Entry)iter.next();
+            if(entry.getKey() == product) {
+                total += entry.getKey().getPrice() * entry.getValue();
+            }
+        }
+
+        return total;
+    }
+
     public int getItemsCount() {
         return basket.getItemsCount();
+    }
+
+    public double getItemsCount(AbstractProduct product) {
+        return basket.getItemsCount(product);
     }
 
     public ProductBasket getBasket() {

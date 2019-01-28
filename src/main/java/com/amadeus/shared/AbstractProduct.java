@@ -1,4 +1,4 @@
-package com.amadeus.shared;
+package main.java.com.amadeus.shared;
 
 abstract public class AbstractProduct {
     protected String code;

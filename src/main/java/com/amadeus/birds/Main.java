@@ -1,5 +1,13 @@
-import com.amadeus.birds.*;
-import com.amadeus.shared.AbstractProduct;
+package main.java.com.amadeus.birds;
+
+import main.java.com.amadeus.birds.*;
+import main.java.com.amadeus.shared.AbstractProduct;
+import main.java.com.amadeus.shared.AbstractStorage;
+
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -41,20 +49,36 @@ public class Main {
 
         Customer customer1 = new Customer("#1", "Vasya", new ProductBasket<Bird>());
         Customer customer2 = new Customer("#2", "Kolya", new ProductBasket<Bird>());
+        Customer customer3 = new Customer("#3", "Petro", new ProductBasket<Bird>());
 
-        market
-            .addCustomer(customer1)
-            .addCustomer(customer2)
-        ;
 
         customer1.addProductToBasket(crow, 1);
         customer1.addProductToBasket(duck, 1);
+
         customer2.addProductToBasket(eagle, 2);
         customer2.addProductToBasket(duck, 3);
+
+        customer3.addProductToBasket(crow, 14);
+        customer3.addProductToBasket(crow, 3);
 
         System.out.println("Products in stock: " + stock.getItemsCount());
         customer1.buyProducts(market);
         customer2.buyProducts(market);
+        customer3.buyProducts(market);
         System.out.println("Products left in stock: " + stock.getItemsCount());
+        System.out.println("Products of type " + crow.getTitle() + " left in stock: " + stock.getItemsCount(crow));
+
+        int daysInterval = 7;
+        double earnings = market.getMoneyEarnings(daysInterval);
+        System.out.println("Earnings per "  + daysInterval + " days:");
+        System.out.println(earnings);
+
+        double earningsByProduct = market.getMoneyEarnings(daysInterval, crow);
+        System.out.println("Earnings per "  + daysInterval + " days, by " + crow.getTitle() + " product:");
+        System.out.println(earningsByProduct);
+
+        int lessThan = 3;
+        System.out.println("Products in stock less than  "  + lessThan + ":");
+        System.out.println(market.getProductsInstockLessThan(lessThan));
     }
 }

@@ -1,8 +1,12 @@
-package com.amadeus.shared;
+package main.java.com.amadeus.shared;
+
+import main.java.com.amadeus.birds.Transaction;
 
 import java.security.InvalidParameterException;
-import java.util.HashMap;
-import java.util.Map;
+import java.time.LocalDateTime;
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 abstract public class AbstractStorage<K> {
     protected HashMap<K, Integer> items = new HashMap();
@@ -16,6 +20,18 @@ abstract public class AbstractStorage<K> {
 
         for(Map.Entry<K, Integer> entry: items.entrySet()) {
             total += entry.getValue();
+        }
+
+        return total;
+    }
+
+    public int getItemsCount(K item) {
+        int total = 0;
+
+        for(Map.Entry<K, Integer> entry: items.entrySet()) {
+            if(entry.getKey() == item) {
+                total += entry.getValue();
+            }
         }
 
         return total;
@@ -70,5 +86,17 @@ abstract public class AbstractStorage<K> {
         }
 
         return false;
+    }
+
+    public static <K, V> Map<K, V> filterByValue(Map<K, V> map, Predicate<V> predicate) {
+        return map.entrySet()
+            .stream()
+            .filter(x -> predicate.test(x.getValue()))
+            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
+        ;
+    }
+
+    public static Predicate<Integer> itemsLessThan(int count) {
+        return p -> p < count;
     }
 }

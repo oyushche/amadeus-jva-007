@@ -1,6 +1,6 @@
-package com.amadeus.birds;
+package main.java.com.amadeus.birds;
 
-import com.amadeus.shared.AbstractProduct;
+import main.java.com.amadeus.shared.AbstractProduct;
 
 import java.util.Objects;
 
