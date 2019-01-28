@@ -1,0 +1,2 @@
+https://www.callicoder.com/java-hashmap/
+https://dzone.com/articles/things-to-keep-in-mind-while-using-custom-classes
