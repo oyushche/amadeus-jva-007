@@ -196,7 +196,7 @@ public class Purchase {
         Collections.sort(orders, Comparator.comparing(UserOrders::getNumber));
 
         for (UserOrders uo: orders) {
-            result += uo.getCustomer() + " " + uo.getTotal().toString() + "$\n";
+            result += uo.getCustomer() + " " + uo.getNumber().toString() + "\n";
         }
 
         return result;
