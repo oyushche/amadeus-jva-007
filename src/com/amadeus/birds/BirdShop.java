@@ -1,8 +1,6 @@
 package com.amadeus.birds;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Kysliakovskyi on 24.01.2019.
@@ -54,10 +52,20 @@ public class BirdShop {
         }
         return result;
     }
+    public Integer sales(Bird bird){
+        Integer result = 0;
+        for (Transaction transaction : transactionList) {
+            if (bird == transaction.getBird()) {
+                if (transaction.getType() == -1){
+                    result += transaction.getAmount();
+                }
+            }
+        }
+        return result;
+    }
     public void printTransactions() {
         for (Transaction transaction : transactionList) {
             System.out.println(transaction);
-
         }
     }
     public void printStorage() {
@@ -66,6 +74,66 @@ public class BirdShop {
 
     public Integer rest(Bird bird){
         return storage.rest(bird);
+    }
+    public Double totalProfit(){
+        Double result = 0.0;
+        for (Transaction transaction : transactionList) {
+            if (transaction.getType() == -1){
+                result += transaction.getCost() - transaction.getNetCost();
+            }
+        }
+        return result;
+    }
+    public List<Bird> fewRest(Integer max) {
+        return storage.fewRest(max);
+    }
+    public List<Client> topClients() {
+        List<Client> result = new ArrayList<>();
+        Map<Client, Double> counter = new HashMap<>();
+        for (Transaction transaction : transactionList) {
+            if (transaction.getType() == -1){
+                if (counter.containsKey(transaction.getClient())){
+                    counter.put(transaction.getClient(), counter.get(transaction.getClient()) + transaction.getCost());
+                }
+                else{
+                    counter.put(transaction.getClient(), transaction.getCost());
+                }
+            }
+        }
+        // sorting counter map by value reverse
+        List<Map.Entry<Client, Double>> list = new ArrayList<>(counter.entrySet());
+        list.sort(Map.Entry.comparingByValue());
+        for (Map.Entry<Client, Double> entry : list) {
+           result.add(entry.getKey());
+        }
+        Collections.reverse(result);
+        //-------------
+        return result;
+    }
+
+    public List<Client> topClientsByDeal(){
+        List<Client> result = new ArrayList<>();
+
+        Map<Client, Integer> counter = new HashMap<>();
+        for (Transaction transaction : transactionList) {
+            if (transaction.getType() == -1){
+                if (counter.containsKey(transaction.getClient())){
+                    counter.put(transaction.getClient(), counter.get(transaction.getClient()) + 1);
+                }
+                else{
+                    counter.put(transaction.getClient(), 1);
+                }
+            }
+        }
+        // sorting counter map by value reverse
+        List<Map.Entry<Client, Integer>> list = new ArrayList<>(counter.entrySet());
+        list.sort(Map.Entry.comparingByValue());
+        for (Map.Entry<Client, Integer> entry : list) {
+            result.add(entry.getKey());
+        }
+        Collections.reverse(result);
+
+        return result;
     }
 
 }

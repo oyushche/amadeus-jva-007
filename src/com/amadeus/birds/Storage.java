@@ -93,4 +93,23 @@ public class Storage {
         }
         System.out.println();
     }
+    public List<Bird> fewRest(Integer max) {
+        List<Bird> result = new ArrayList<>();
+        Map<Bird, Integer> counter = new HashMap<>();
+        for (StoredBird storedBird : birdStore) {
+            if (counter.containsKey(storedBird.getBird())){
+                counter.put(storedBird.getBird(), counter.get(storedBird.getBird()) + 1);
+            }
+            else{
+                counter.put(storedBird.getBird(), 1);
+            }
+
+        }
+        for (Bird bird : counter.keySet()) {
+            if (counter.get(bird) < max) {
+                result.add(bird);
+            }
+        }
+        return result;
+    }
 }
