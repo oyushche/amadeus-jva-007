@@ -24,8 +24,8 @@ public class Main
         demoBirdshop.buy(albatros, 40.0, 4, peter);
 
         demoBirdshop.sell(duck, 100.0, 1, peter);
-        demoBirdshop.sell(duck, 50.0, 8, anna);
-        demoBirdshop.sell(eagle, 1000.0, 5, olga);
+        demoBirdshop.sell(duck, 50.0, 8, anna); // из двух партий с разной себестоимостью
+        demoBirdshop.sell(eagle, 1000.0, 5, olga); // попытка продажи больше чем есть на складе
         demoBirdshop.sell(albatros, 250.0, 2, olga);
         demoBirdshop.sell(albatros, 100.0, 1, anna);
         demoBirdshop.sell(duck, 3.0, 1, anna);
