@@ -1,37 +1,15 @@
 package com.amadeus.birds;
 
-import java.awt.geom.Arc2D;
-
-/**
- * Created by Kysliakovskyi on 24.01.2019.
- */
 public class Transaction {
-    private boolean type;
+    private int type; // +1 incoming, -1 selling
     private Bird bird;
     private Client client;
     private Integer amount;
     private Double cost;
     private Double netCost;
 
-    public Double getNetCost() {
-        return netCost;
-    }
-
-    public void setNetCost(Double netCost) {
-        this.netCost = netCost;
-    }
-
-    public Transaction(Bird bird, Client client, Integer amount, Double cost) {
-        this.type = true;
-        this.bird = bird;
-        this.client = client;
-        this.amount = amount;
-        this.cost = cost;
-        this.netCost = 0.0;
-    }
-
-    public Transaction(Bird bird, Client client, Integer amount, Double cost, Double netCost ) {
-        this.type = false;
+    public Transaction(int type, Bird bird, Client client, Integer amount, Double cost, Double netCost) {
+        this.type = type;
         this.bird = bird;
         this.client = client;
         this.amount = amount;
@@ -39,23 +17,11 @@ public class Transaction {
         this.netCost = netCost;
     }
 
-    @Override
-    public String toString() {
-        return "Transaction{" +
-                "" + type + '\t' +
-                ", " + bird + '\t' +
-                ", " + client + '\t' +
-                ", " + amount + '\t' +
-                ", " + cost + '\t' +
-                ", " + netCost +
-                '}';
-    }
-
-    public boolean isType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(boolean type) {
+    public void setType(int type) {
         this.type = type;
     }
 
@@ -90,4 +56,23 @@ public class Transaction {
     public void setCost(Double cost) {
         this.cost = cost;
     }
+
+    public Double getNetCost() {
+        return netCost;
+    }
+
+    public void setNetCost(Double netCost) {
+        this.netCost = netCost;
+    }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "type= " + type +
+                ", " + bird +
+                ", " + client +
+                ", amount= " + amount +
+                ", cost= " + cost +
+                ", netCost= " + netCost +
+                '}';    }
 }

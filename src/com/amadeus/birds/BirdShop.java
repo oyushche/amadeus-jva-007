@@ -2,51 +2,70 @@ package com.amadeus.birds;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Kysliakovskyi on 24.01.2019.
  */
 public class BirdShop {
-    private List<Transaction> transactions;
-    private Stock stock = new Stock();
+    private List<Transaction> transactionList = new ArrayList<>();
+    private Storage storage = new Storage();
 
-    public BirdShop() {
-        transactions = new ArrayList<>();
+    public void buy(Bird bird, Double cost, Integer amount, Client provider){
+        if (amount > 0) {
+            storage.add(bird, cost, amount);
+            transactionList.add(new Transaction(1, bird, provider, amount, cost, cost));
+        }
     }
-    public void buy(Bird bird, Client provider, Integer amount, Double cost){
-        Transaction t = new Transaction(bird, provider, amount, cost);
-        transactions.add(t);
-    }
-    public void sell(Bird bird, Client customer, Integer amount, Double cost){
-        Transaction t = new Transaction(bird, customer, amount, cost, stock.sellBirds(bird.getName(),amount));
-        transactions.add(t);
-    }
-    public Integer rest(Bird bird){
-        Integer result = 0;
-        for (Transaction t:transactions ) {
-            if (t.getBird() == bird) {
-                if (t.isType()) {
-                    result = result + t.getAmount();
+    public void sell(Bird bird, Double cost, Integer amount, Client customer){
+        if (amount > 0) {
+            Map<String, Object> res = storage.remove(bird, amount);
+            Integer sellAmount = (Integer) res.get("amount");
+            if (sellAmount > 0) {
+                Double sellCost = cost;
+                if (! sellAmount.equals(amount)) {
+                    sellCost = cost/amount * sellAmount;
                 }
-                else {result = result - t.getAmount();}
+                transactionList.add(new Transaction(-1, bird, customer, sellAmount, sellCost, (Double) res.get("netCost")));
 
             }
         }
-        return result;
     }
-    public Double profit(Bird bird){
+
+    public Double profit(Bird bird) {
         Double result = 0.0;
-        for (Transaction transaction : transactions) {
-            if(transaction.getBird() == bird) {
-
+        for (Transaction transaction : transactionList) {
+            if (bird == transaction.getBird()) {
+                if (transaction.getType() == -1){
+                    result += transaction.getCost() - transaction.getNetCost();
+                }
             }
         }
         return result;
     }
-    public void printTransactionList(){
-        for (Transaction t:transactions) {
-            System.out.println(t);
+    public Double profit(Client client){
+        Double result = 0.0;
+        for (Transaction transaction : transactionList) {
+            if (client == transaction.getClient()) {
+                if (transaction.getType() == -1){
+                    result += transaction.getCost() - transaction.getNetCost();
+                }
+            }
         }
+        return result;
+    }
+    public void printTransactions() {
+        for (Transaction transaction : transactionList) {
+            System.out.println(transaction);
+
+        }
+    }
+    public void printStorage() {
+        storage.printStorsge();
+    }
+
+    public Integer rest(Bird bird){
+        return storage.rest(bird);
     }
 
 }

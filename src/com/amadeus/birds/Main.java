@@ -4,25 +4,39 @@ public class Main
 {
     public static void main(String[] args)
     {
-        System.out.println("=====  Bird shop ====");
-        BirdShop birdShopDemo = new BirdShop();
+        System.out.println(" ==== Bird shop ====");
 
+        BirdShop demoBirdshop = new BirdShop();
+
+        Bird duck = new Bird("duck");
         Bird eagle = new Bird("eagle");
-        Bird albatross = new Bird("albatross");
-        Bird chichken = new Bird("chicken");
+        Bird albatros = new Bird("albatros");
 
-        Client ivan = new Client("Ivan");
         Client peter = new Client("Peter");
-        Client anna  = new Client("Anna");
+        Client olga = new Client("Olga");
+        Client anna = new Client("Anna");
 
-        birdShopDemo.buy(eagle,ivan,5, 10.0);
-        birdShopDemo.buy(albatross,peter,3, 30.0);
-        birdShopDemo.sell(eagle,anna,1,5.0);
+        demoBirdshop.buy(duck, 10.0, 5, peter);
+        demoBirdshop.buy(eagle, 300.0, 3, peter);
+        demoBirdshop.buy(duck, 15.0, 10, peter);
+        demoBirdshop.buy(albatros, 40.0, 4, peter);
 
-        birdShopDemo.printTransactionList();
+        demoBirdshop.printStorage();
 
-        System.out.println("rest "+eagle+" = "+birdShopDemo.rest(eagle));
-        System.out.println("prifit "+eagle+" = "+birdShopDemo.profit(eagle));
+        demoBirdshop.sell(duck, 50.0, 8, anna);
+        demoBirdshop.sell(eagle, 1000.0, 5, olga);
+        demoBirdshop.sell(albatros, 250.0, 3, olga);
+        demoBirdshop.sell(albatros, 100.0, 1, anna);
+
+        demoBirdshop.printStorage();
+
+        demoBirdshop.printTransactions();
+
+        System.out.println(duck+" profit = "+demoBirdshop.profit(duck));
+        System.out.println(anna+" profit = "+demoBirdshop.profit(anna));
+        System.out.println(olga+" profit = "+demoBirdshop.profit(olga));
+        System.out.println(duck+" rest = "+demoBirdshop.rest(duck));
+        System.out.println(eagle+" rest = "+demoBirdshop.rest(eagle));
 
     }
 }
